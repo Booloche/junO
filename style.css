@@ -1,0 +1,408 @@
+:root{
+    --bg:#FFFFFF;
+    --text:#111111;
+    --muted:#777777;
+    --accent:#c58b2a;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Urbanist',sans-serif;
+    overflow-x:hidden;
+}
+
+/* Verrouillage du scroll quand le menu mobile est ouvert */
+body.nav-open {
+    overflow: hidden;
+}
+
+/* =========================
+   NAVIGATION (DESKTOP)
+========================= */
+
+.burger-btn {
+    display: none;
+}
+
+.nav{
+    position:fixed;
+    right:40px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:100;
+}
+
+.nav-links {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:20px;
+}
+
+.nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-size:.85rem;
+    letter-spacing:.08em;
+    opacity:.35;
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
+}
+
+.nav a:hover{
+    opacity:1;
+    transform:translateX(-4px);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+}
+
+.hero-content{
+    text-align:center;
+    margin-bottom:5px;
+}
+
+.hero h1{
+    font-size:clamp(6rem,14vw,14rem);
+    font-weight:200;
+    letter-spacing:-0.04em;
+}
+
+.hero h1 span{
+    color:var(--text);
+}
+
+.subtitle{
+    color:var(--muted);
+    margin-top:20px;
+}
+
+.hero-image{
+    max-width:1000px;
+    width:95vw;
+    height:auto;
+}
+
+/* =========================
+   WORKS
+========================= */
+
+.artwork{
+    max-width:1400px;
+    margin:180px auto;
+    padding:0 40px;
+    text-align:center;
+}
+
+.artwork img{
+    display:block;
+
+    max-width:65vw;
+    max-height:65vh;
+
+    width:auto;
+    height:auto;
+
+    margin:0 auto;
+
+    cursor:pointer;
+
+    transition:transform .5s ease;
+}
+
+.artwork img:hover{
+    transform:scale(1.01);
+}
+
+/* Contrainte spécifique de taille pour l'image 5 */
+.artwork[data-number="05"] img {
+    max-width: 45vw;
+    max-height: 45vh;
+}
+
+.caption{
+    margin-top:20px;
+}
+
+.caption span{
+    color:var(--accent);
+}
+
+/* =========================
+   LISTEN
+========================= */
+
+.listen{
+    max-width:900px;
+    margin:180px auto;
+    padding:0 40px;
+}
+
+.track{
+    margin-bottom:30px;
+}
+
+audio{
+    width:100%;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+    max-width:900px;
+    margin:180px auto;
+    padding:0 40px 120px;
+
+    color:var(--muted);
+}
+
+.about p{
+    font-size:1.4rem;
+    line-height:1.6;
+}
+
+/* =========================
+   INDICATEUR
+========================= */
+
+#section-indicator{
+    position:fixed;
+
+    left:30px;
+    top:35%;
+
+    width:180px;
+
+    pointer-events:none;
+    user-select:none;
+
+    z-index:1;
+
+    opacity:0;
+
+    transition:opacity .8s ease;
+}
+
+.indicator-number{
+    display:block;
+
+    font-size:clamp(8rem,14vw,14rem);
+    font-weight:200;
+
+    line-height:1;
+
+    color:rgba(197,139,42,.06);
+}
+
+.indicator-symbol{
+    position:absolute;
+
+    left:0;
+    top:100%;
+
+    margin-top:10px;
+
+    font-size:2rem;
+
+    color:rgba(197,139,42,.10);
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+
+    transform:translateY(30px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
+
+#lightbox{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.9);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:opacity .4s ease;
+
+    z-index:9999;
+}
+
+#lightbox.active{
+    opacity:1;
+    visibility:visible;
+}
+
+#lightbox img{
+    max-width:90vw;
+    max-height:90vh;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:1200px){
+    .indicator-number{
+        font-size:clamp(5rem,10vw,8rem);
+    }
+
+    #section-indicator{
+        left:15px;
+    }
+}
+
+/* Point de bascule à 1000px : Passage en menu Burger */
+@media (max-width:1000px){
+    #section-indicator{
+        display:none;
+    }
+
+    .burger-btn {
+        display: flex;
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        width: 30px;
+        height: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1010;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .burger-btn span {
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: var(--text);
+        transition: transform .3s ease, opacity .3s ease;
+    }
+
+    .burger-btn.active span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+    .burger-btn.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .burger-btn.active span:nth-child(3) {
+        transform: translateY(-12px) rotate(-45deg);
+    }
+
+    .nav {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--bg);
+        transform: none;
+        top: 0;
+        right: 0;
+        z-index: 1000;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .4s ease, visibility .4s ease;
+    }
+
+    .nav.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-links {
+        align-items: center;
+        gap: 40px;
+    }
+
+    .nav a {
+        font-size: 1.5rem;
+        letter-spacing: .15em;
+        opacity: 0.5;
+    }
+    
+    .nav a:hover {
+        transform: none;
+    }
+}
+
+@media (max-width:800px){
+    .indicator-number{
+        font-size:clamp(3rem,8vw,5rem);
+    }
+
+    .indicator-symbol{
+        font-size:1rem;
+    }
+
+    #section-indicator{
+        left:10px;
+    }
+}
+
+@media (max-width:700px){
+    .artwork{
+        padding:0 20px;
+    }
+
+    .artwork img{
+        max-width:80%;
+    }
+
+    .artwork[data-number="05"] img {
+        max-width: 60%;
+    }
+}

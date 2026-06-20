@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>junO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght=200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <button class="burger-btn" aria-label="Menu de navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav">
+        <div class="nav-links">
+            <a href="#works">WORKS</a>
+            <a href="#listen">LISTEN</a>
+            <a href="#about">ABOUT</a>
+        </div>
+    </nav>
+
+    <div id="section-indicator">
+        <span class="indicator-number">01</span>
+        <span class="indicator-symbol">○</span>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>jun<span>O</span></h1>
+            <p class="subtitle">
+                Visual Experiments<br>
+                & Sound Textures
+            </p>
+        </div>
+        <img src="images/hero.jpg" alt="junO hero artwork" class="hero-image">
+    </header>
+
+    <main id="works"></main>
+
+    <section id="listen" class="listen">
+        <h2>Listening Room</h2>
+        <div class="track">
+            <span>junO - CityScape</span>
+            <audio controls>
+                <source src="audio/CityScape.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+        <div class="track">
+            <span>junO - Ghost Lines</span>
+            <audio controls>
+                <source src="audio/ghost-lines.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+        <div class="track">
+            <span>junO - Fragment A</span>
+            <audio controls>
+                <source src="audio/fragment-a.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <p>
+            junO explore les frontières entre structure,
+            matière et mouvement à travers le dessin,
+            la texture numérique et l'expérimentation sonore.
+        </p>
+    </section>
+
+    <div id="lightbox">
+        <img id="lightbox-image" src="" alt="Agrandissement de l'œuvre">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
