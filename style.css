@@ -154,53 +154,21 @@ body.nav-open {
 }
 
 /* =========================
-   LISTENING ROOM (LE LABO)
+   LISTEN
 ========================= */
 
-.listen {
-    padding: 100px 10%;
-    background: #0d0d0d;       /* On bascule sur un noir très profond */
-    color: #ffffff;            /* Le texte passe en blanc */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: background 0.5s ease; /* Transition douce au scroll */
+.listen{
+    max-width:900px;
+    margin:180px auto;
+    padding:0 40px;
 }
 
-.listen h2 {
-    font-size: 2rem;
-    font-weight: 300;
-    letter-spacing: .15em;
-    margin-bottom: 60px;
-    text-transform: uppercase;
-    color: #ffffff;            /* Titre blanc */
+.track{
+    margin-bottom:30px;
 }
 
-.track {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 25px 0;
-    border-bottom: 1px solid #222; /* Bordure sombre sur fond noir */
-    gap: 40px;
-}
-
-.track span {
-    font-size: .9rem;
-    letter-spacing: .08em;
-    color: #888888;            /* Texte estompé style "machine" */
-}
-
-/* Style du lecteur natif pour l'intégrer au thème sombre */
-.track audio {
-    filter: invert(90%) hue-rotate(180deg); /* Aligne grossièrement le lecteur sur le thème sombre */
-    opacity: 0.8;
-    transition: opacity 0.3s;
-}
-
-.track audio:hover {
-    opacity: 1;
+audio{
+    width:100%;
 }
 
 /* =========================
