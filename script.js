@@ -152,6 +152,8 @@ const prevBtn =
 const nextBtn =
     document.getElementById('next-btn');
 
+    let controlsTimeout;
+
 function preloadAdjacentImages() {
 
     const nextIndex =
@@ -180,7 +182,7 @@ function openLightbox(index) {
         galleryImages[index].alt;
 
     preloadAdjacentImages();
-
+    showControls();
     lightbox.classList.add('active');
 }
 
@@ -211,6 +213,29 @@ function showPreviousImage() {
 
     openLightbox(currentImageIndex);
 }
+
+function showControls() {
+
+    prevBtn.classList.add('visible');
+    nextBtn.classList.add('visible');
+
+    clearTimeout(controlsTimeout);
+
+    controlsTimeout = setTimeout(() => {
+
+        prevBtn.classList.remove('visible');
+        nextBtn.classList.remove('visible');
+
+    }, 1500);
+}
+
+lightbox.addEventListener('mousemove', () => {
+
+    if (!lightbox.classList.contains('active')) return;
+
+    showControls();
+
+});
 
 /* clic hors image = fermeture */
 
