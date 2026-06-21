@@ -18,7 +18,7 @@ html{
 body{
     background:var(--bg);
     color:var(--text);
-    font-family:'Urbanist',sans-serif;
+    font-family: 'Montserrat', sans-serif;
     overflow-x:hidden;
 }
 
