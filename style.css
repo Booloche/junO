@@ -89,7 +89,7 @@ body.nav-open {
 
 .hero h1{
     font-size:clamp(6rem,14vw,14rem);
-    font-weight:200;
+    font-weight:300;
     letter-spacing:-0.04em;
 }
 
