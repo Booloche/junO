@@ -485,3 +485,22 @@ body.nav-open {
         max-width: 60%;
     }
 }
+
+/* =========================
+   TRANSITION WORKS → LISTEN
+========================= */
+
+.transition-zone{
+
+    height:40vh;
+
+    background:
+    linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        #f4f4f4 20%,
+        #dcdcdc 50%,
+        #666666 80%,
+        #0d0d0d 100%
+    );
+}
