@@ -18,7 +18,7 @@ html{
 body{
     background:var(--bg);
     color:var(--text);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Urbanist', sans-serif;
     overflow-x:hidden;
 }
 
@@ -89,7 +89,7 @@ body.nav-open {
 
 .hero h1 {
     font-size: clamp(6rem,14vw,14rem);
-    font-weight: 500;
+    font-weight: 300;
     letter-spacing: -0.04em;
 }
 
