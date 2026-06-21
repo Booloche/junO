@@ -87,13 +87,13 @@ body.nav-open {
     margin-bottom:5px;
 }
 
-.hero h1{
-    font-size:clamp(6rem,14vw,14rem);
-    font-weight:500;
-    letter-spacing:-0.04em;
+.hero h1 {
+    font-size: clamp(6rem,14vw,14rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
 
-    -webkit-text-size-adjust:100%;
-    text-rendering:geometricPrecision;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: geometricPrecision;
 }
 
 .hero h1 span{
