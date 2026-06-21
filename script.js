@@ -16,9 +16,12 @@ async function loadGallery() {
         const data = await response.json();
 
         data.forEach((work, index) => {
-            const formattedNumber = String(index + 1).padStart(2, '0');
+
+            const formattedNumber =
+                String(index + 1).padStart(2, '0');
 
             const section = document.createElement('section');
+
             section.className = 'artwork reveal';
             section.setAttribute('data-number', formattedNumber);
 
@@ -37,7 +40,11 @@ async function loadGallery() {
         initGalleryFeatures();
 
     } catch (error) {
-        console.error("Erreur lors du chargement de la galerie JSON :", error);
+
+        console.error(
+            "Erreur lors du chargement de la galerie JSON :",
+            error
+        );
     }
 }
 
@@ -48,54 +55,73 @@ async function loadGallery() {
 function initGalleryFeatures() {
 
     const artworks = document.querySelectorAll('.artwork');
-    galleryImages = [...document.querySelectorAll('.artwork img')];
 
-    /* Indicateur gauche */
+    galleryImages =
+        [...document.querySelectorAll('.artwork img')];
+
+    /* compteur gauche */
 
     const observer = new IntersectionObserver((entries) => {
+
         entries.forEach((entry) => {
 
             if (!entry.isIntersecting) return;
 
-            const number = entry.target.dataset.number;
+            const number =
+                entry.target.dataset.number;
 
             if (number === currentNumber) return;
 
             currentNumber = number;
 
             indicatorNumber.textContent = number;
+
             indicator.style.opacity = "1";
 
             clearTimeout(window.indicatorTimeout);
 
-            window.indicatorTimeout = setTimeout(() => {
-                indicator.style.opacity = "0";
-            }, 3000);
+            window.indicatorTimeout =
+                setTimeout(() => {
+
+                    indicator.style.opacity = "0";
+
+                }, 3000);
 
         });
+
     }, {
         threshold: 0.6
     });
 
-    artworks.forEach(artwork => observer.observe(artwork));
+    artworks.forEach(
+        artwork => observer.observe(artwork)
+    );
 
-    /* Reveal */
+    /* reveal */
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+    const revealObserver =
+        new IntersectionObserver((entries) => {
 
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            entries.forEach((entry) => {
 
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        'visible'
+                    );
+                }
+
+            });
+
+        }, {
+            threshold: 0.15
         });
-    }, {
-        threshold: 0.15
-    });
 
-    artworks.forEach(artwork => revealObserver.observe(artwork));
+    artworks.forEach(
+        artwork => revealObserver.observe(artwork)
+    );
 
-    /* Lightbox */
+    /* ouverture lightbox */
 
     galleryImages.forEach((img, index) => {
 
@@ -114,15 +140,46 @@ function initGalleryFeatures() {
    LIGHTBOX
 ========================= */
 
-const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightbox-image');
+const lightbox =
+    document.getElementById('lightbox');
+
+const lightboxImage =
+    document.getElementById('lightbox-image');
+
+const prevBtn =
+    document.getElementById('prev-btn');
+
+const nextBtn =
+    document.getElementById('next-btn');
+
+function preloadAdjacentImages() {
+
+    const nextIndex =
+        (currentImageIndex + 1)
+        % galleryImages.length;
+
+    const prevIndex =
+        (currentImageIndex - 1 + galleryImages.length)
+        % galleryImages.length;
+
+    new Image().src =
+        galleryImages[nextIndex].src;
+
+    new Image().src =
+        galleryImages[prevIndex].src;
+}
 
 function openLightbox(index) {
 
     currentImageIndex = index;
 
-    lightboxImage.src = galleryImages[index].src;
-    lightboxImage.alt = galleryImages[index].alt;
+    lightboxImage.src =
+        galleryImages[index].src;
+
+    lightboxImage.alt =
+        galleryImages[index].alt;
+
+    preloadAdjacentImages();
 
     lightbox.classList.add('active');
 }
@@ -131,7 +188,10 @@ function showNextImage() {
 
     currentImageIndex++;
 
-    if (currentImageIndex >= galleryImages.length) {
+    if (
+        currentImageIndex >=
+        galleryImages.length
+    ) {
         currentImageIndex = 0;
     }
 
@@ -142,8 +202,11 @@ function showPreviousImage() {
 
     currentImageIndex--;
 
-    if (currentImageIndex < 0) {
-        currentImageIndex = galleryImages.length - 1;
+    if (
+        currentImageIndex < 0
+    ) {
+        currentImageIndex =
+            galleryImages.length - 1;
     }
 
     openLightbox(currentImageIndex);
@@ -154,40 +217,58 @@ function showPreviousImage() {
 lightbox.addEventListener('click', (e) => {
 
     if (e.target === lightbox) {
+
         lightbox.classList.remove('active');
     }
 
 });
 
-/* clic image = navigation */
+/* boutons */
 
-lightboxImage.addEventListener('click', (e) => {
+if (prevBtn) {
 
-    const middle = window.innerWidth / 2;
+    prevBtn.addEventListener('click', (e) => {
 
-    if (e.clientX > middle) {
-        showNextImage();
-    } else {
+        e.stopPropagation();
+
         showPreviousImage();
-    }
 
-});
+    });
+
+}
+
+if (nextBtn) {
+
+    nextBtn.addEventListener('click', (e) => {
+
+        e.stopPropagation();
+
+        showNextImage();
+
+    });
+
+}
 
 /* clavier */
 
 document.addEventListener('keydown', (e) => {
 
-    if (!lightbox.classList.contains('active')) return;
+    if (
+        !lightbox.classList.contains('active')
+    ) return;
 
     if (e.key === 'ArrowRight') {
+
         showNextImage();
     }
 
     if (e.key === 'ArrowLeft') {
+
         showPreviousImage();
     }
 
     if (e.key === 'Escape') {
+
         lightbox.classList.remove('active');
     }
 
@@ -199,7 +280,8 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('scroll', () => {
 
-    const rect = worksSection.getBoundingClientRect();
+    const rect =
+        worksSection.getBoundingClientRect();
 
     const insideWorks =
         rect.top < window.innerHeight &&
@@ -209,7 +291,9 @@ window.addEventListener('scroll', () => {
 
         indicator.style.opacity = "0";
 
-        clearTimeout(window.indicatorTimeout);
+        clearTimeout(
+            window.indicatorTimeout
+        );
 
         currentNumber = "";
     }
@@ -220,25 +304,41 @@ window.addEventListener('scroll', () => {
    MENU BURGER
 ========================= */
 
-const burgerBtn = document.querySelector('.burger-btn');
-const navMenu = document.querySelector('.nav');
-const navLinks = document.querySelectorAll('.nav a');
+const burgerBtn =
+    document.querySelector('.burger-btn');
+
+const navMenu =
+    document.querySelector('.nav');
+
+const navLinks =
+    document.querySelectorAll('.nav a');
 
 function toggleMenu() {
 
     burgerBtn.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    document.body.classList.toggle('nav-open');
 
+    navMenu.classList.toggle('active');
+
+    document.body.classList.toggle(
+        'nav-open'
+    );
 }
 
-burgerBtn.addEventListener('click', toggleMenu);
+burgerBtn.addEventListener(
+    'click',
+    toggleMenu
+);
 
 navLinks.forEach(link => {
 
     link.addEventListener('click', () => {
 
-        if (burgerBtn.classList.contains('active')) {
+        if (
+            burgerBtn.classList.contains(
+                'active'
+            )
+        ) {
+
             toggleMenu();
         }
 

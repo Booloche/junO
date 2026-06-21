@@ -317,6 +317,53 @@ body.nav-open {
     max-height:90vh;
 }
 
+.lightbox-nav{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:3rem;
+
+    font-weight:200;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    transition:opacity .3s ease;
+
+    z-index:10001;
+
+    padding:20px;
+
+    user-select:none;
+}
+
+#prev-btn{
+    left:30px;
+}
+
+#next-btn{
+    right:30px;
+}
+
+#lightbox:hover .lightbox-nav{
+    opacity:.35;
+}
+
+.lightbox-nav:hover{
+    opacity:1 !important;
+}
+
 /* =========================
    RESPONSIVE
 ========================= */
