@@ -2,51 +2,61 @@
     {
         "file": "study01.jpg",
         "title": "Study I",
-        "year": "2026"
+        "year": "2026",
+        "order": 100
     },
     {
         "file": "study02.jpg",
         "title": "Study II",
-        "year": "2026"
+        "year": "2026",
+        "order": 90
     },
     {
         "file": "study03.jpg",
         "title": "Study III",
-        "year": "2026"
+        "year": "2026",
+        "order": 80
     },
     {
         "file": "study04.jpg",
         "title": "Study IV",
-        "year": "2026"
+        "year": "2026",
+        "order": 70
     },
     {
         "file": "study05.jpg",
         "title": "Study V",
-        "year": "2026"
+        "year": "2026",
+        "order": 60
     },
     {
         "file": "study06.jpg",
         "title": "Study VI",
-        "year": "2026"
+        "year": "2026",
+        "order": 50
     },
     {
         "file": "study07.jpg",
         "title": "Study VII",
-        "year": "2026"
+        "year": "2026",
+        "order": 40
     },
     {
         "file": "study08.jpg",
         "title": "Study VIII",
-        "year": "2026"
+        "year": "2026",
+        "order": 30
     },
     {
         "file": "study09.jpg",
         "title": "Study IX",
-        "year": "2026"
+        "year": "2026",
+        "order": 20
     },
     {
         "file": "study10.jpg",
         "title": "Study X",
-        "year": "2026"
+        "year": "2026",
+        "order": 10
     }
 ]
