@@ -3,7 +3,12 @@
     --text:#111111;
     --muted:#777777;
     --accent:#c58b2a;
+    --mat:#f8f8f8;
 }
+
+/* =========================
+   RESET
+========================= */
 
 *{
     margin:0;
@@ -18,21 +23,20 @@ html{
 body{
     background:var(--bg);
     color:var(--text);
-    font-family: 'Urbanist', sans-serif;
+    font-family:'Urbanist',sans-serif;
     overflow-x:hidden;
 }
 
-/* Verrouillage du scroll quand le menu mobile est ouvert */
-body.nav-open {
-    overflow: hidden;
+body.nav-open{
+    overflow:hidden;
 }
 
 /* =========================
-   NAVIGATION (DESKTOP)
+   NAVIGATION
 ========================= */
 
-.burger-btn {
-    display: none;
+.burger-btn{
+    display:none;
 }
 
 .nav{
@@ -43,7 +47,7 @@ body.nav-open {
     z-index:100;
 }
 
-.nav-links {
+.nav-links{
     display:flex;
     flex-direction:column;
     align-items:flex-end;
@@ -68,6 +72,69 @@ body.nav-open {
 }
 
 /* =========================
+   AUDIO TICKER
+========================= */
+
+#audio-ticker{
+
+    display:none;
+
+    position:relative;
+
+    width:100%;
+
+    height:38px;
+
+    margin-bottom:40px;
+
+    background:var(--mat);
+
+    overflow:hidden;
+
+    align-items:center;
+}
+
+.audio-ticker-inline{
+
+    opacity:.75;
+}
+
+#audio-ticker.active{
+    display:flex;
+}
+
+.ticker-track{
+
+    display:flex;
+    align-items:center;
+
+    white-space:nowrap;
+
+    animation:tickerMove 18s linear infinite;
+}
+
+.ticker-track span{
+
+    padding-right:80px;
+
+    font-size:.78rem;
+    letter-spacing:.12em;
+
+    color:var(--text);
+}
+
+@keyframes tickerMove{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* =========================
    HERO
 ========================= */
 
@@ -87,10 +154,10 @@ body.nav-open {
     margin-bottom:5px;
 }
 
-.hero h1 {
-    font-size: clamp(6rem,14vw,14rem);
-    font-weight: 300;
-    letter-spacing: -0.04em;
+.hero h1{
+    font-size:clamp(6rem,14vw,14rem);
+    font-weight:300;
+    letter-spacing:-0.04em;
 }
 
 .hero h1 span{
@@ -132,9 +199,7 @@ body.nav-open {
 
     padding:18px;
 
-    border:none;
-
-    background:#f8f8f8;
+    background:var(--mat);
 
     cursor:pointer;
 
@@ -145,10 +210,9 @@ body.nav-open {
     transform:scale(1.005);
 }
 
-/* Contrainte spécifique de taille pour l'image 5 */
-.artwork[data-number="05"] img {
-    max-width: 45vw;
-    max-height: 45vh;
+.artwork[data-number="05"] img{
+    max-width:45vw;
+    max-height:45vh;
 }
 
 .caption{
@@ -160,53 +224,137 @@ body.nav-open {
 }
 
 /* =========================
-   LISTENING ROOM (LE LABO)
+   LISTENING ROOM V2
 ========================= */
 
-.listen {
-    padding: 100px 10%;
-    background: #2a2a2a;     /* On bascule sur un noir très profond */
-    color: #ffffff;            /* Le texte passe en blanc */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: background 0.5s ease; /* Transition douce au scroll */
+.listen{
+
+    background:#111111;
+    color:#ffffff;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:120px 10%;
 }
 
-.listen h2 {
-    font-size: 2rem;
-    font-weight: 300;
-    letter-spacing: .15em;
-    margin-bottom: 60px;
-    text-transform: uppercase;
-    color: #ffffff;            /* Titre blanc */
+.listen-inner{
+
+    width:min(900px,100%);
 }
 
-.track {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 25px 0;
-    border-bottom: 1px solid #222; /* Bordure sombre sur fond noir */
-    gap: 40px;
+.listen h2{
+
+    font-size:2rem;
+    font-weight:300;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    margin-bottom:20px;
 }
 
-.track span {
-    font-size: .9rem;
-    letter-spacing: .08em;
-    color: #888888;            /* Texte estompé style "machine" */
+.playlist{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:18px;
+
+    margin-bottom:60px;
 }
 
-/* Style du lecteur natif pour l'intégrer au thème sombre */
-.track audio {
-    filter: invert(90%) hue-rotate(180deg); /* Aligne grossièrement le lecteur sur le thème sombre */
-    opacity: 0.8;
-    transition: opacity 0.3s;
+.track-item{
+
+    display:flex;
+    align-items:center;
+
+    gap:18px;
+
+    background:none;
+    border:none;
+
+    color:#ffffff;
+
+    font-family:inherit;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    opacity:.65;
+
+    transition:
+        opacity .25s ease,
+        color .25s ease;
 }
 
-.track audio:hover {
-    opacity: 1;
+.track-item:hover{
+    opacity:1;
+}
+
+.track-number{
+
+    width:35px;
+
+    color:#777777;
+}
+
+.track-title{
+
+    letter-spacing:.08em;
+}
+
+.track-indicator{
+
+    opacity:0;
+
+    color:var(--accent);
+
+    transition:opacity .25s ease;
+}
+
+.track-item.active{
+
+    opacity:1;
+}
+
+.track-item.active .track-title{
+    color:var(--accent);
+}
+
+.track-item.active .track-indicator{
+    opacity:1;
+}
+
+.audio-player-wrapper{
+
+    display:none;
+
+    padding-top:35px;
+
+    border-top:1px solid #2a2a2a;
+}
+
+.audio-player-wrapper.active{
+    display:block;
+}
+
+#main-player{
+
+    width:100%;
+
+    filter:
+        invert(90%)
+        hue-rotate(180deg);
+
+    opacity:.9;
 }
 
 /* =========================
@@ -215,7 +363,9 @@ body.nav-open {
 
 .about{
     max-width:900px;
+
     margin:180px auto;
+
     padding:0 40px 120px;
 
     color:var(--muted);
@@ -231,6 +381,7 @@ body.nav-open {
 ========================= */
 
 #section-indicator{
+
     position:fixed;
 
     left:30px;
@@ -249,9 +400,11 @@ body.nav-open {
 }
 
 .indicator-number{
+
     display:block;
 
     font-size:clamp(8rem,14vw,14rem);
+
     font-weight:200;
 
     line-height:1;
@@ -260,6 +413,7 @@ body.nav-open {
 }
 
 .indicator-symbol{
+
     position:absolute;
 
     left:0;
@@ -277,6 +431,7 @@ body.nav-open {
 ========================= */
 
 .reveal{
+
     opacity:0;
 
     transform:translateY(30px);
@@ -287,6 +442,7 @@ body.nav-open {
 }
 
 .reveal.visible{
+
     opacity:1;
     transform:translateY(0);
 }
@@ -296,6 +452,7 @@ body.nav-open {
 ========================= */
 
 #lightbox{
+
     position:fixed;
     inset:0;
 
@@ -314,11 +471,13 @@ body.nav-open {
 }
 
 #lightbox.active{
+
     opacity:1;
     visibility:visible;
 }
 
 #lightbox img{
+
     max-width:90vw;
     max-height:90vh;
 
@@ -331,6 +490,7 @@ body.nav-open {
 }
 
 #lightbox img.transitioning{
+
     opacity:0;
     transform:scale(.985);
 }
@@ -354,18 +514,10 @@ body.nav-open {
     color:rgba(255,255,255,.15);
 
     font-size:1.6rem;
-    font-weight:300;
 
     cursor:pointer;
 
-    z-index:10001;
-
-    user-select:none;
-
     opacity:0;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,.15);
 
     transition:
         opacity .25s ease,
@@ -392,111 +544,111 @@ body.nav-open {
    RESPONSIVE
 ========================= */
 
-@media (max-width:1200px){
-    .indicator-number{
-        font-size:clamp(5rem,10vw,8rem);
-    }
-
-    #section-indicator{
-        left:15px;
-    }
-}
-
-/* Point de bascule à 1000px : Passage en menu Burger */
 @media (max-width:1000px){
+
     #section-indicator{
         display:none;
     }
 
-    .burger-btn {
-        display: flex;
-        position: fixed;
-        top: 30px;
-        right: 30px;
-        width: 30px;
-        height: 24px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1010;
-        flex-direction: column;
-        justify-content: space-between;
+    .burger-btn{
+
+        display:flex;
+
+        position:fixed;
+
+        top:30px;
+        right:30px;
+
+        width:30px;
+        height:24px;
+
+        background:none;
+        border:none;
+
+        z-index:1010;
+
+        cursor:pointer;
+
+        flex-direction:column;
+        justify-content:space-between;
     }
 
-    .burger-btn span {
-        display: block;
-        width: 100%;
-        height: 1px;
-        background-color: var(--text);
-        transition: transform .3s ease, opacity .3s ease;
+    .burger-btn span{
+
+        width:100%;
+        height:1px;
+
+        background:var(--text);
+
+        transition:.3s;
     }
 
-    .burger-btn.active span:nth-child(1) {
-        transform: translateY(11px) rotate(45deg);
-    }
-    .burger-btn.active span:nth-child(2) {
-        opacity: 0;
-    }
-    .burger-btn.active span:nth-child(3) {
-        transform: translateY(-12px) rotate(-45deg);
+    .burger-btn.active span:nth-child(1){
+        transform:translateY(11px) rotate(45deg);
     }
 
-    .nav {
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100vh;
-        background: var(--bg);
-        transform: none;
-        top: 0;
-        right: 0;
-        z-index: 1000;
-        
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity .4s ease, visibility .4s ease;
+    .burger-btn.active span:nth-child(2){
+        opacity:0;
     }
 
-    .nav.active {
-        opacity: 1;
-        visibility: visible;
+    .burger-btn.active span:nth-child(3){
+        transform:translateY(-12px) rotate(-45deg);
     }
 
-    .nav-links {
-        align-items: center;
-        gap: 40px;
+    .nav{
+
+        position:fixed;
+
+        inset:0;
+
+        width:100vw;
+        height:100vh;
+
+        background:var(--bg);
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        opacity:0;
+        visibility:hidden;
+
+        transition:.4s;
     }
 
-    .nav a {
-        font-size: 1.5rem;
-        letter-spacing: .15em;
-        opacity: 0.5;
-    }
-    
-    .nav a:hover {
-        transform: none;
-    }
-}
+    .nav.active{
 
-@media (max-width:800px){
-    .indicator-number{
-        font-size:clamp(3rem,8vw,5rem);
+        opacity:1;
+        visibility:visible;
     }
 
-    .indicator-symbol{
-        font-size:1rem;
+    .nav-links{
+
+        align-items:center;
+        gap:40px;
     }
 
-    #section-indicator{
-        left:10px;
+    .nav a{
+
+        font-size:1.5rem;
+        letter-spacing:.15em;
     }
 }
 
 @media (max-width:700px){
+
+    .listen{
+        padding:120px 24px;
+    }
+
+    .listen h2{
+        font-size:1.5rem;
+    }
+
+    .track-item{
+        font-size:.92rem;
+    }
+
     .artwork{
         padding:0 20px;
     }
@@ -505,7 +657,7 @@ body.nav-open {
         max-width:80%;
     }
 
-    .artwork[data-number="05"] img {
-        max-width: 60%;
+    .artwork[data-number="05"] img{
+        max-width:60%;
     }
 }

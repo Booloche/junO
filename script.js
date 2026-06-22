@@ -7,13 +7,93 @@ let currentImageIndex = 0;
 let galleryImages = [];
 
 /* =========================
+   AUDIO V2
+========================= */
+
+const player =
+    document.getElementById('main-player');
+
+const playerWrapper =
+    document.querySelector('.audio-player-wrapper');
+
+const trackItems =
+    document.querySelectorAll('.track-item');
+
+const ticker =
+    document.getElementById('audio-ticker');
+
+const tickerText =
+    document.getElementById('ticker-text');
+
+function activateTrack(track) {
+
+    trackItems.forEach(item => {
+        item.classList.remove('active');
+    });
+
+    track.classList.add('active');
+}
+
+function updateTicker(title) {
+
+    const message =
+        `NOW PLAYING · ${title} · LOOP MODE · 2026 ·`;
+
+    tickerText.textContent = message;
+
+    const duplicate =
+        ticker.querySelector('.ticker-track span:last-child');
+
+    if (duplicate) {
+        duplicate.textContent = message;
+    }
+}
+
+function playTrack(track) {
+
+    const file =
+        track.dataset.file;
+
+    const title =
+        track.dataset.title;
+
+    activateTrack(track);
+
+    player.src = file;
+    player.loop = true;
+
+    playerWrapper.classList.add('active');
+
+    ticker.classList.add('active');
+
+    updateTicker(title);
+
+    player.play();
+}
+
+trackItems.forEach(track => {
+
+    track.addEventListener('click', () => {
+
+        playTrack(track);
+
+    });
+
+});
+
+/* =========================
    CHARGEMENT GALERIE
 ========================= */
 
 async function loadGallery() {
+
     try {
-        const response = await fetch('works.json');
-        const data = await response.json();
+
+        const response =
+            await fetch('works.json');
+
+        const data =
+            await response.json();
 
         data.sort((a, b) => a.order - b.order);
 
@@ -22,10 +102,16 @@ async function loadGallery() {
             const formattedNumber =
                 String(index + 1).padStart(2, '0');
 
-            const section = document.createElement('section');
+            const section =
+                document.createElement('section');
 
-            section.className = 'artwork reveal';
-            section.setAttribute('data-number', formattedNumber);
+            section.className =
+                'artwork reveal';
+
+            section.setAttribute(
+                'data-number',
+                formattedNumber
+            );
 
             section.innerHTML = `
                 <img src="images/${work.file}" alt="${work.title}">
@@ -37,6 +123,7 @@ async function loadGallery() {
             `;
 
             worksSection.appendChild(section);
+
         });
 
         initGalleryFeatures();
@@ -47,7 +134,9 @@ async function loadGallery() {
             "Erreur lors du chargement de la galerie JSON :",
             error
         );
+
     }
+
 }
 
 /* =========================
@@ -56,46 +145,54 @@ async function loadGallery() {
 
 function initGalleryFeatures() {
 
-    const artworks = document.querySelectorAll('.artwork');
+    const artworks =
+        document.querySelectorAll('.artwork');
 
     galleryImages =
         [...document.querySelectorAll('.artwork img')];
 
-    const observer = new IntersectionObserver((entries) => {
+    const observer =
+        new IntersectionObserver((entries) => {
 
-        entries.forEach((entry) => {
+            entries.forEach((entry) => {
 
-            if (!entry.isIntersecting) return;
+                if (!entry.isIntersecting) return;
 
-            const number =
-                entry.target.dataset.number;
+                const number =
+                    entry.target.dataset.number;
 
-            if (number === currentNumber) return;
+                if (number === currentNumber) return;
 
-            currentNumber = number;
+                currentNumber = number;
 
-            indicatorNumber.textContent = number;
+                indicatorNumber.textContent =
+                    number;
 
-            indicator.style.opacity = "1";
+                indicator.style.opacity = "1";
 
-            clearTimeout(window.indicatorTimeout);
+                clearTimeout(
+                    window.indicatorTimeout
+                );
 
-            window.indicatorTimeout =
-                setTimeout(() => {
+                window.indicatorTimeout =
+                    setTimeout(() => {
 
-                    indicator.style.opacity = "0";
+                        indicator.style.opacity =
+                            "0";
 
-                }, 3000);
+                    }, 3000);
 
+            });
+
+        }, {
+            threshold: 0.6
         });
 
-    }, {
-        threshold: 0.6
-    });
+    artworks.forEach(artwork => {
 
-    artworks.forEach(
-        artwork => observer.observe(artwork)
-    );
+        observer.observe(artwork);
+
+    });
 
     const revealObserver =
         new IntersectionObserver((entries) => {
@@ -107,6 +204,7 @@ function initGalleryFeatures() {
                     entry.target.classList.add(
                         'visible'
                     );
+
                 }
 
             });
@@ -115,9 +213,11 @@ function initGalleryFeatures() {
             threshold: 0.15
         });
 
-    artworks.forEach(
-        artwork => revealObserver.observe(artwork)
-    );
+    artworks.forEach(artwork => {
+
+        revealObserver.observe(artwork);
+
+    });
 
     galleryImages.forEach((img, index) => {
 
@@ -125,11 +225,14 @@ function initGalleryFeatures() {
 
             currentImageIndex = index;
 
-            openLightbox(currentImageIndex);
+            openLightbox(
+                currentImageIndex
+            );
 
         });
 
     });
+
 }
 
 /* =========================
@@ -157,7 +260,10 @@ function preloadAdjacentImages() {
         % galleryImages.length;
 
     const prevIndex =
-        (currentImageIndex - 1 + galleryImages.length)
+        (
+            currentImageIndex - 1 +
+            galleryImages.length
+        )
         % galleryImages.length;
 
     new Image().src =
@@ -165,6 +271,7 @@ function preloadAdjacentImages() {
 
     new Image().src =
         galleryImages[prevIndex].src;
+
 }
 
 function showControls() {
@@ -172,14 +279,23 @@ function showControls() {
     prevBtn.classList.add('visible');
     nextBtn.classList.add('visible');
 
-    clearTimeout(controlsTimeout);
+    clearTimeout(
+        controlsTimeout
+    );
 
-    controlsTimeout = setTimeout(() => {
+    controlsTimeout =
+        setTimeout(() => {
 
-        prevBtn.classList.remove('visible');
-        nextBtn.classList.remove('visible');
+            prevBtn.classList.remove(
+                'visible'
+            );
 
-    }, 1500);
+            nextBtn.classList.remove(
+                'visible'
+            );
+
+        }, 1500);
+
 }
 
 function openLightbox(index) {
@@ -193,14 +309,18 @@ function openLightbox(index) {
         galleryImages[index].alt;
 
     preloadAdjacentImages();
+
     showControls();
 
     lightbox.classList.add('active');
+
 }
 
 function transitionToImage(index) {
 
-    lightboxImage.classList.add('transitioning');
+    lightboxImage.classList.add(
+        'transitioning'
+    );
 
     setTimeout(() => {
 
@@ -214,122 +334,168 @@ function transitionToImage(index) {
 
         preloadAdjacentImages();
 
-        lightboxImage.classList.remove('transitioning');
+        lightboxImage.classList.remove(
+            'transitioning'
+        );
 
     }, 180);
+
 }
 
 function showNextImage() {
 
-    let nextIndex = currentImageIndex + 1;
+    let nextIndex =
+        currentImageIndex + 1;
 
-    if (nextIndex >= galleryImages.length) {
+    if (
+        nextIndex >= galleryImages.length
+    ) {
         nextIndex = 0;
     }
 
     transitionToImage(nextIndex);
+
 }
 
 function showPreviousImage() {
 
-    let prevIndex = currentImageIndex - 1;
+    let prevIndex =
+        currentImageIndex - 1;
 
     if (prevIndex < 0) {
-        prevIndex = galleryImages.length - 1;
+
+        prevIndex =
+            galleryImages.length - 1;
+
     }
 
     transitionToImage(prevIndex);
+
 }
 
-lightbox.addEventListener('mousemove', () => {
+lightbox.addEventListener(
+    'mousemove',
+    () => {
 
-    if (!lightbox.classList.contains('active')) return;
+        if (
+            !lightbox.classList.contains(
+                'active'
+            )
+        ) return;
 
-    showControls();
+        showControls();
 
-});
-
-lightbox.addEventListener('click', (e) => {
-
-    if (e.target === lightbox) {
-
-        lightbox.classList.remove('active');
     }
+);
 
-});
+lightbox.addEventListener(
+    'click',
+    (e) => {
+
+        if (e.target === lightbox) {
+
+            lightbox.classList.remove(
+                'active'
+            );
+
+        }
+
+    }
+);
 
 if (prevBtn) {
 
-    prevBtn.addEventListener('click', (e) => {
+    prevBtn.addEventListener(
+        'click',
+        (e) => {
 
-        e.stopPropagation();
+            e.stopPropagation();
 
-        showPreviousImage();
+            showPreviousImage();
 
-    });
+        }
+    );
 
 }
 
 if (nextBtn) {
 
-    nextBtn.addEventListener('click', (e) => {
+    nextBtn.addEventListener(
+        'click',
+        (e) => {
 
-        e.stopPropagation();
+            e.stopPropagation();
 
-        showNextImage();
+            showNextImage();
 
-    });
+        }
+    );
 
 }
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener(
+    'keydown',
+    (e) => {
 
-    if (
-        !lightbox.classList.contains('active')
-    ) return;
+        if (
+            !lightbox.classList.contains(
+                'active'
+            )
+        ) return;
 
-    if (e.key === 'ArrowRight') {
+        if (e.key === 'ArrowRight') {
 
-        showNextImage();
+            showNextImage();
+
+        }
+
+        if (e.key === 'ArrowLeft') {
+
+            showPreviousImage();
+
+        }
+
+        if (e.key === 'Escape') {
+
+            lightbox.classList.remove(
+                'active'
+            );
+
+        }
+
     }
-
-    if (e.key === 'ArrowLeft') {
-
-        showPreviousImage();
-    }
-
-    if (e.key === 'Escape') {
-
-        lightbox.classList.remove('active');
-    }
-
-});
+);
 
 /* =========================
    HORS GALERIE
 ========================= */
 
-window.addEventListener('scroll', () => {
+window.addEventListener(
+    'scroll',
+    () => {
 
-    const rect =
-        worksSection.getBoundingClientRect();
+        const rect =
+            worksSection.getBoundingClientRect();
 
-    const insideWorks =
-        rect.top < window.innerHeight &&
-        rect.bottom > 0;
+        const insideWorks =
+            rect.top < window.innerHeight &&
+            rect.bottom > 0;
 
-    if (!insideWorks) {
+        if (!insideWorks) {
 
-        indicator.style.opacity = "0";
+            indicator.style.opacity =
+                "0";
 
-        clearTimeout(
-            window.indicatorTimeout
-        );
+            clearTimeout(
+                window.indicatorTimeout
+            );
 
-        currentNumber = "";
+            currentNumber = "";
+
+        }
+
     }
-
-});
+);
 
 /* =========================
    MENU BURGER
@@ -346,13 +512,18 @@ const navLinks =
 
 function toggleMenu() {
 
-    burgerBtn.classList.toggle('active');
+    burgerBtn.classList.toggle(
+        'active'
+    );
 
-    navMenu.classList.toggle('active');
+    navMenu.classList.toggle(
+        'active'
+    );
 
     document.body.classList.toggle(
         'nav-open'
     );
+
 }
 
 burgerBtn.addEventListener(
@@ -362,18 +533,22 @@ burgerBtn.addEventListener(
 
 navLinks.forEach(link => {
 
-    link.addEventListener('click', () => {
+    link.addEventListener(
+        'click',
+        () => {
 
-        if (
-            burgerBtn.classList.contains(
-                'active'
-            )
-        ) {
+            if (
+                burgerBtn.classList.contains(
+                    'active'
+                )
+            ) {
 
-            toggleMenu();
+                toggleMenu();
+
+            }
+
         }
-
-    });
+    );
 
 });
 

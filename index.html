@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>junO</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <button class="burger-btn" aria-label="Menu de navigation">
@@ -30,70 +34,153 @@
         <span class="indicator-symbol">○</span>
     </div>
 
+
+
+    <!-- HERO -->
+
     <header class="hero">
+
         <div class="hero-content">
+
             <h1>jun<span>O</span></h1>
+
             <p class="subtitle">
                 Accidents graphiques<br>
                 & Elucubrations sonores
             </p>
+
         </div>
-        <img src="images/hero.jpg" alt="junO hero artwork" class="hero-image">
+
+        <img
+            src="images/hero.jpg"
+            alt="junO hero artwork"
+            class="hero-image"
+        >
+
     </header>
+
+    <!-- WORKS -->
 
     <main id="works"></main>
 
+    <!-- LISTENING ROOM V2 -->
+
     <section id="listen" class="listen">
-        <h2>Listening Room</h2>
-        <div class="track">
-            <span>junO - Quark</span>
-            <audio controls>
-                <source src="audio/Quark.mp3" type="audio/mpeg">
-                Votre navigateur ne prend pas en charge l'écoute de ce morceau.
-            </audio>
+
+        <div class="listen-inner">
+
+            <h2>Listening Room</h2>
+
+<div id="audio-ticker" class="audio-ticker-inline">
+
+    <div class="ticker-track">
+
+        <span id="ticker-text">
+            NOW PLAYING · QUARK · LOOP MODE · 2026 ·
+        </span>
+
+        <span aria-hidden="true">
+            NOW PLAYING · QUARK · LOOP MODE · 2026 ·
+        </span>
+
+    </div>
+
+</div>
+
+<div class="playlist">
+
+                <button
+                    class="track-item"
+                    data-title="QUARK"
+                    data-file="audio/Quark.mp3"
+                >
+                    <span class="track-number">01</span>
+                    <span class="track-title">QUARK</span>
+                    <span class="track-indicator">●</span>
+                </button>
+
+                <button
+                    class="track-item"
+                    data-title="PIXEL KING"
+                    data-file="audio/Pixel-King.mp3"
+                >
+                    <span class="track-number">02</span>
+                    <span class="track-title">PIXEL KING</span>
+                    <span class="track-indicator">●</span>
+                </button>
+
+                <button
+                    class="track-item"
+                    data-title="THE POND KNOWS"
+                    data-file="audio/the-pond-knows.mp3"
+                >
+                    <span class="track-number">03</span>
+                    <span class="track-title">THE POND KNOWS</span>
+                    <span class="track-indicator">●</span>
+                </button>
+
+                <button
+                    class="track-item"
+                    data-title="FRAGMENT A"
+                    data-file="audio/fragment-a.mp3"
+                >
+                    <span class="track-number">04</span>
+                    <span class="track-title">FRAGMENT A</span>
+                    <span class="track-indicator">●</span>
+                </button>
+
+            </div>
+
+            <div class="audio-player-wrapper">
+
+                <audio
+                    id="main-player"
+                    controls
+                    controlsList="nodownload"
+                    preload="metadata"
+                    loop
+                >
+                </audio>
+
+            </div>
+
         </div>
-        <div class="track">
-            <span>junO - Pixel King</span>
-            <audio controls>
-                <source src="audio/Pixel-King.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-        <div class="track">
-            <span>junO - The pond knows</span>
-            <audio controls>
-                <source src="audio/the-pond-knows.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-        <div class="track">
-            <span>junO - Fragment A</span>
-            <audio controls>
-                <source src="audio/fragment-a.mp3" type="audio/mpeg">
-            </audio>
-        </div>
+
     </section>
 
+    <!-- ABOUT -->
+
     <section id="about" class="about">
+
         <p>
             junO explore les frontières entre structure,
             matière et mouvement à travers le dessin,
             la texture numérique et l'expérimentation sonore.
         </p>
+
     </section>
+
+    <!-- LIGHTBOX -->
 
     <div id="lightbox">
 
-    <button id="prev-btn" class="lightbox-nav">
-    ○
-    </button>
+        <button id="prev-btn" class="lightbox-nav">
+            ○
+        </button>
 
-    <img id="lightbox-image" src="" alt="Agrandissement de l'œuvre">
+        <img
+            id="lightbox-image"
+            src=""
+            alt="Agrandissement de l'œuvre"
+        >
 
-    <button id="next-btn" class="lightbox-nav">
-    ○
-    </button>
+        <button id="next-btn" class="lightbox-nav">
+            ○
+        </button>
 
     </div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
