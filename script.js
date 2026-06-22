@@ -15,7 +15,7 @@ async function loadGallery() {
         const response = await fetch('works.json');
         const data = await response.json();
 
-        data.sort((a, b) => b.order - a.order);
+        data.sort((a, b) => a.order - b.order);
 
         data.forEach((work, index) => {
 
