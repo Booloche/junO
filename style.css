@@ -608,9 +608,7 @@ body.nav-open{
 
         display:flex;
         justify-content:center;
-        align-items: flex-start;
-        padding-top: 120px;
-        overflow-y: auto;
+        align-items:center;
 
         opacity:0;
         visibility:hidden;
@@ -624,11 +622,10 @@ body.nav-open{
         visibility:visible;
     }
 
-    .nav-links{
-
-        align-items:center;
-        gap:40px;
-    }
+    .nav-links {
+    align-items:center;
+    gap:40px;
+}
 
     .nav a{
 
