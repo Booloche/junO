@@ -130,13 +130,19 @@ body.nav-open {
 
     margin:0 auto;
 
+    padding:18px;
+
+    border:none;
+
+    background:#f8f8f8;
+
     cursor:pointer;
 
     transition:transform .5s ease;
 }
 
 .artwork img:hover{
-    transform:scale(1.01);
+    transform:scale(1.005);
 }
 
 /* Contrainte spécifique de taille pour l'image 5 */
