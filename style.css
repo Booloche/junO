@@ -608,7 +608,9 @@ body.nav-open{
 
         display:flex;
         justify-content:center;
-        align-items:center;
+        align-items: flex-start;
+        padding-top: 120px;
+        overflow-y: auto;
 
         opacity:0;
         visibility:hidden;
