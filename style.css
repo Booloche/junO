@@ -622,9 +622,17 @@ body.nav-open{
         visibility:visible;
     }
 
-    .nav-links {
+   .nav-links {
+
+    display:flex;
+    flex-direction:column;
+
     align-items:center;
+
     gap:40px;
+
+    position:relative;
+    top:180px;
 }
 
     .nav a{
