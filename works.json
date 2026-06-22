@@ -58,5 +58,11 @@
         "title": "Study X",
         "year": "2026",
         "order": 10
+    },
+    {
+        "file": "study11.jpg",
+        "title": "Study XI",
+        "year": "2026",
+        "order": 9
     }
 ]
